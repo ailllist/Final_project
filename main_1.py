@@ -25,7 +25,7 @@ def calc_pos_2_NE(string, avgs):
     tmp_E_f = float(string[4][:3])
     tmp_E_e = float(string[4][3:]) / 60
     f_E = tmp_E_f + tmp_E_e
-    f_N, f_E, _ = pm.geodetic2enu(f_N, f_E, 0, avgs[0], avgs[1], 0)
+    f_E, f_N, _ = pm.geodetic2enu(f_N, f_E, 0, avgs[0], avgs[1], 0)
 
     return f_N, f_E
 
@@ -169,7 +169,6 @@ for i in pre_RTAP1:
     N, E = calc_pos_2_NE(i, avgs)
     RTAP1_NE.append([N, E])
 
-
 for i in pre_RTAP2:
     N, E = calc_pos_2_NE(i, avgs)
     RTAP2_NE.append([N, E])
@@ -250,9 +249,18 @@ Galaxy4_NE = np.array(Galaxy4_NE)
 
 if __name__ == "__main__":
 
-    plt.plot(RTAP_NE[:, 0], RTAP_NE[:, 1], "or")
-    plt.plot(iPHONE_NE[:, 0], iPHONE_NE[:, 1], "og")
-    plt.plot(Galaxy_NE[:, 0], Galaxy_NE[:, 1], "ob")
+    plt.plot(RTAP_NE[:, 1], RTAP_NE[:, 0], "or", markersize=3)
+    plt.plot(sum(RTAP_NE[:, 1])/len(RTAP_NE[:, 1]), sum(RTAP_NE[:, 0])/len(RTAP_NE[:, 0]), "vk", markersize=2)
+    plt.plot(iPHONE_NE[:, 1], iPHONE_NE[:, 0], "og", markersize=3)
+    plt.plot(sum(iPHONE_NE[:, 1]) / len(iPHONE_NE[:, 1]), sum(iPHONE_NE[:, 0]) / len(iPHONE_NE[:, 0]), "vm", markersize=2)
+    plt.plot(Galaxy_NE[:, 1], Galaxy_NE[:, 0], "ob", markersize=3)
+    plt.plot(sum(Galaxy_NE[:, 1]) / len(Galaxy_NE[:, 1]), sum(Galaxy_NE[:, 0]) / len(Galaxy_NE[:, 0]), "vc",
+             markersize=2)
     plt.xlim([-100, 100])
     plt.ylim([-100, 100])
+    plt.legend(["RTAP", "center of RTAP", "iPhone", "center of iPhone", "Galaxy", "center of Galaxy"])
+    plt.title("all point")
+    plt.xlabel("E (m)")
+    plt.ylabel("N (m)")
+    plt.gca().set_aspect('equal', adjustable='box')
     plt.show()
