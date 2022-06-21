@@ -2,3 +2,7 @@
 .idea/
 
 umbrella.nmea
+
+Figures/공통/
+
+__pycache__/
