@@ -1,6 +1,8 @@
+import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
 import numpy as np
 import pymap3d as pm
+import matplotlib as mpl
 
 GT_DATA = [37.449858691094, 126.651158547171]
 
@@ -59,11 +61,22 @@ for i in pre_ref_point:
 REF_POINT_NE = np.array(REF_POINT_NE)
 print(REF_POINT_NE)
 AVG_REF_POINT_NE = np.average(REF_POINT_NE, axis=0)
+dist_N = abs(min(REF_POINT_NE[:, 0]) - max(REF_POINT_NE[:, 0]))
+dist_E = abs(min(REF_POINT_NE[:, 1]) - max(REF_POINT_NE[:, 1]))
+dist = dist_N if dist_N > dist_E else dist_E
+
+fontpath = r'C:\Users\1234\AppData\Local\Microsoft\Windows\Fonts\NanumGothic.ttf'
+font = fm.FontProperties(fname=fontpath, size = 24)
+plt.rc('font', family='NanumGothic')
+plt.rc('axes', unicode_minus=False)
+mpl.font_manager._rebuild()
+fm._rebuild()
 
 if __name__ == "__main__":
     plt.plot(REF_POINT_NE[:, 1], REF_POINT_NE[:, 0], "og", markersize=3)
     plt.gca().set_aspect('equal', adjustable='box')
-    # plt.xlim([AVG_REF_POINT_NE[1] - 0.05, AVG_REF_POINT_NE[1] + 0.05])
-    # plt.ylim([AVG_REF_POINT_NE[0] - 0.05, AVG_REF_POINT_NE[0] + 0.05])
-    plt.title("refer")
+
+    plt.xlim([AVG_REF_POINT_NE[1] - dist, AVG_REF_POINT_NE[1] + dist])
+    plt.ylim([AVG_REF_POINT_NE[0] - dist, AVG_REF_POINT_NE[0] + dist])
+    plt.title("미융대+하이데거 (우천)")
     plt.show()
