@@ -30,11 +30,10 @@ def calc_pos_2_NE(string, avgs):
     f_E, f_N, _ = pm.geodetic2enu(f_N, f_E, 0, GT_DATA[0], GT_DATA[1], 0)
 
     return f_N, f_E
-title_name = r"60주년+2호관_1"
-
-with open("nmea/60+2_1_normal.nmea", "r") as f:
+title_name = r"서호관 + 5호관"
+with open("nmea/west+5_normal.nmea", "r") as f:
     ref_lines = [i.strip("\n").strip("$").split(",") for i in f.readlines()]
-with open("nmea/60+2_1_umbrella.nmea", "r") as f:
+with open("nmea/west+5_umbrella.nmea", "r") as f:
     ref_lines1 = [i.strip("\n").strip("$").split(",") for i in f.readlines()]
 
 f = open(f"Figure/{title_name}.txt", "w", encoding="utf-8")
