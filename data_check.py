@@ -63,10 +63,13 @@ REF_POINT_LL = np.array(REF_POINT_LL)
 AVG_REF_LL = np.average(REF_POINT_LL, axis=0)
 
 REF_POINT_NE = []
+signal_info = []
 
 for i in pre_ref_point:
     N, E = calc_pos_2_NE(i, AVG_REF_LL)
+    signal_info.append(i[6:8])
     REF_POINT_NE.append([N, E])
+print(signal_info)
 
 REF_POINT_NE = np.array(REF_POINT_NE)
 AVG_REF_POINT_NE = np.average(REF_POINT_NE, axis=0)
