@@ -31,9 +31,9 @@ def calc_pos_2_NE(string, avgs):
 
     return f_N, f_E
 title_name = r"서호관 + 5호관"
-with open("nmea/west+5_normal.nmea", "r") as f:
+with open("nmea/2_back_normal.nmea", "r") as f:
     ref_lines = [i.strip("\n").strip("$").split(",") for i in f.readlines()]
-with open("nmea/west+5_umbrella.nmea", "r") as f:
+with open("nmea/2_back_normal_2.nmea", "r") as f:
     ref_lines1 = [i.strip("\n").strip("$").split(",") for i in f.readlines()]
 
 f = open(f"Figure/{title_name}.txt", "w", encoding="utf-8")
@@ -63,10 +63,13 @@ REF_POINT_LL = np.array(REF_POINT_LL)
 AVG_REF_LL = np.average(REF_POINT_LL, axis=0)
 
 REF_POINT_NE = []
+signal_info = []
 
 for i in pre_ref_point:
     N, E = calc_pos_2_NE(i, AVG_REF_LL)
+    signal_info.append(i[6:8])
     REF_POINT_NE.append([N, E])
+print(signal_info)
 
 REF_POINT_NE = np.array(REF_POINT_NE)
 AVG_REF_POINT_NE = np.average(REF_POINT_NE, axis=0)
@@ -93,8 +96,8 @@ fontpath = r'C:\Users\hojun\AppData\Local\Microsoft\Windows\Fonts\NanumGothic.tt
 font = fm.FontProperties(fname=fontpath, size = 24)
 plt.rc('font', family='NanumGothic')
 plt.rc('axes', unicode_minus=False)
-mpl.font_manager._rebuild()
-fm._rebuild()
+# mpl.font_manager._rebuild()
+# fm._rebuild()
 
 if __name__ == "__main__":
     # plt.plot(REF_POINT_NE[:, 1], REF_POINT_NE[:, 0], "og", markersize=3)
