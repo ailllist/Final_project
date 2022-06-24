@@ -200,6 +200,7 @@ if __name__ == "__main__":
         lbl_list.append("RTK float ambiguities")
     except:
         pass
+
     f.close()
     plt.xlim([AVG_REF_POINT_NE[1] - dist, AVG_REF_POINT_NE[1] + dist])
     plt.ylim([AVG_REF_POINT_NE[0] - dist, AVG_REF_POINT_NE[0] + dist])
