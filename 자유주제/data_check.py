@@ -6,7 +6,7 @@ import matplotlib as mpl
 
 GT_DATA = [37.449858691094, 126.651158547171]
 
-def calc_pos_2_LL(string):
+def calc_pos_2_LL(string): # 위도 경도를 뽑아내는 함수
 
     tmp_N_f = float(string[2][:2])
     tmp_N_e = float(string[2][2:]) / 60
@@ -18,7 +18,7 @@ def calc_pos_2_LL(string):
 
     return f_Lat, f_Lon
 
-def calc_pos_2_NE(string, avgs):
+def calc_pos_2_NE(string, avgs): # N, E를 뽑아내는 함수
 
     tmp_N_f = float(string[2][:2])
     tmp_N_e = float(string[2][2:]) / 60
@@ -30,6 +30,7 @@ def calc_pos_2_NE(string, avgs):
     f_E, f_N, _ = pm.geodetic2enu(f_N, f_E, 0, GT_DATA[0], GT_DATA[1], 0)
 
     return f_N, f_E
+
 title_name = r"서호관 + 5호관"
 with open("nmea/2_back_normal.nmea", "r") as f:
     ref_lines = [i.strip("\n").strip("$").split(",") for i in f.readlines()]

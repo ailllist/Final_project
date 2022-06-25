@@ -8,7 +8,7 @@ import math
 GT_DATA = [37.449858691094, 126.651158547171]
 
 
-def calc_pos_2_LL(string):
+def calc_pos_2_LL(string): # 위도 경도를 추출하는 함수
     tmp_N_f = float(string[2][:2])
     tmp_N_e = float(string[2][2:]) / 60
     f_Lat = tmp_N_f + tmp_N_e
@@ -20,7 +20,7 @@ def calc_pos_2_LL(string):
     return f_Lat, f_Lon
 
 
-def calc_pos_2_NE(string, avgs):
+def calc_pos_2_NE(string, avgs): # N, E를 추출하는 함수
     tmp_N_f = float(string[2][:2])
     tmp_N_e = float(string[2][2:]) / 60
     f_N = tmp_N_f + tmp_N_e
@@ -33,7 +33,7 @@ def calc_pos_2_NE(string, avgs):
     return f_N, f_E
 
 
-def calc_plt_info(*args):
+def calc_plt_info(*args): # 원, 사각형 등 그래프를 그리는데 필요한 정보를 추출하는 함수
     tot_data = []
     for i in args:
         for j in i:
