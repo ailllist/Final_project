@@ -36,7 +36,7 @@ def calc_avg(NE_list: np.ndarray):
     return [avg_n, avg_e], [dist_n, dist_e]
 
 
-with open("umbrella.nmea", "r", encoding="utf-8") as f:
+with open("nmea_2.log", "r", encoding="utf-8") as f:
     lines1 = [i.strip("\n").strip("$").split(",") for i in f.readlines()]
 
 RTAP1 = []

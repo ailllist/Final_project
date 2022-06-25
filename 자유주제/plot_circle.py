@@ -51,10 +51,11 @@ def calc_plt_info(*args):
     return info_data, t_circle, t_rect
 
 
-title_name = r"하이테크 앞 숲" # 1 4 5
-with open("nmea/forest_normal.nmea", "r") as f:
+title_name = r"Only DGPS" # 1 4 5
+# title_name = r"DGPS + RTK_fixed + RTK_float" # 1 4 5
+with open("nmea/kimhyuntae+heidaeger_normal.nmea", "r") as f:
     ref_lines = [i.strip("\n").strip("$").split(",") for i in f.readlines()]
-with open("nmea/forest_normal_2.nmea", "r") as f:
+with open("nmea/kimhyuntae+heidaeger_normal_2.nmea", "r") as f:
     ref_lines1 = [i.strip("\n").strip("$").split(",") for i in f.readlines()]
 
 # f = open(f"Figure/{title_name}.txt", "w", encoding="utf-8")
@@ -186,9 +187,13 @@ if __name__ == "__main__":
 
     # info_data, circle, rect = calc_plt_info(signal_1, signal_2, signal_4, signal_5)
     # info_data, circle, rect = calc_plt_info(signal_4, signal_5)
-    info_data, circle, rect = calc_plt_info(signal_4)
+    plt.plot(AVG_SIGNAL_4[1], AVG_SIGNAL_4[0], "Xc", markersize=5)
+    lbl_list.append("average pos using RTAP")
+    info_data, circle, rect = calc_plt_info(signal_2)
     # info_data, circle, rect = calc_plt_info(signal_5)
     circle_area = math.pi * ((info_data[4]/2)**2)
+    center_of_rect = info_data[1]
+    print("dist of center: ", np.linalg.norm(center_of_rect-AVG_SIGNAL_4), "(m)")
     rect_area = info_data[2] * info_data[3]
     # td_left = [info_data[1][0] - info_data[2]/3, info_data[1][1] - info_data[3]/3]
     # rect2_area = pth.Rectangle((td_left[1], td_left[0]), info_data[3]/1.5, info_data[2]/1.5, edgecolor="yellow", fill=False)
